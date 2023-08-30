@@ -10,6 +10,6 @@ app.config.from_object(Config())
 
 @app.route('/')
 def index():
-    todolist = get_items
+    todolist = get_items()
     return render_template ('index.html', todolist = todolist)
 
