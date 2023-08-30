@@ -12,5 +12,7 @@ app.config.from_object(Config())
 def index():
     todolist = get_items()
     titles = [d['title'] for d in todolist]
-    return render_template ('index.html', titles = titles)
+    title_one = titles[0]
+    title_two = titles[1]
+    return render_template ('index.html', title_one = title_one, title_two = title_two)
 
