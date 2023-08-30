@@ -11,5 +11,6 @@ app.config.from_object(Config())
 @app.route('/')
 def index():
     todolist = get_items()
-    return render_template ('index.html', todolist = todolist)
+    titles = [d['title'] for d in todolist]
+    return render_template ('index.html', titles = titles)
 
