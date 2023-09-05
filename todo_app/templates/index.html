@@ -9,9 +9,30 @@
 
   <div class="row">
     <div class="col-md-12">
+      <h2>Add Item</h2>
+        <form action="/additem" method="post" class="input-form">
+          <div class="input-form">
+            <label for="title">Enter your to-do item: </label>
+            <input type="text" name="title1" id="name" required />
+          </div>
+          <div class="input form">
+            <input type="submit" value="Add Item" />
+          </div>
+        </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
       <h2>Items</h2>
       <ul class="list-group mb-4">
-        <!-- List the todo items here -->
+          <ul>
+            <li>
+              {% for i in list1 %}
+                <h2>{{ i }}</h2>
+              {% endfor %}
+            </li>
+          </ul>
       </ul>
     </div>
   </div>

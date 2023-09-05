@@ -15,6 +15,7 @@ def get_items():
     """
     return session.get('items', _DEFAULT_ITEMS.copy())
 
+#print ('items', _DEFAULT_ITEMS.copy())
 
 def get_item(id):
     """
