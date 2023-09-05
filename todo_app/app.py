@@ -16,11 +16,7 @@ app.config.from_object(Config())
 def index():
     todolist = get_items()
     titles = [d['title'] for d in todolist]
-    title_one = titles[0]
-    title_two = titles[1]
-    title_three = titles[2]
-    return render_template ('index.html', title_one = title_one, title_two = title_two, title_three = title_three)
-# Can turn into a for loop if I have time
+    return render_template ('index.html', list1=titles)
 
 @app.route('/additem', methods=['GET', 'POST'])
 def additem():

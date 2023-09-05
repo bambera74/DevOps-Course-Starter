@@ -27,9 +27,11 @@
       <h2>Items</h2>
       <ul class="list-group mb-4">
           <ul>
-            <li> {{title_one}} </li>
-            <li> {{title_two}} </li>
-            <li> {{title_three}} </li>
+            <li>
+              {% for i in list1 %}
+                <h2>{{ i }}</h2>
+              {% endfor %}
+            </li>
           </ul>
       </ul>
     </div>
