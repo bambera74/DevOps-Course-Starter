@@ -6,7 +6,7 @@ from todo_app.data.session_items import get_items
 
 from todo_app.data.session_items import add_item
 
-from flask import request
+from flask import request, redirect, session
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -20,6 +20,8 @@ def index():
 
 @app.route('/additem', methods=['GET', 'POST'])
 def additem():
-    title = request.form.get('title')
-    add_item(title)
-    return index()
+    if request.method =='POST':
+        title = request.form.get('title1')
+        add_item(title)
+        return redirect (('/'))
+    
