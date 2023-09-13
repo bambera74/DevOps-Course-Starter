@@ -12,11 +12,12 @@ app = Flask(__name__)
 app.config.from_object(Config())
 
 
+
 @app.route('/')
 def index():
     todolist = get_items()
-    titles = [d['title'] for d in todolist]
-    return render_template ('index.html', list1=titles)
+    tasks = [d['name'] for d in todolist]
+    return render_template ('index.html', list1=tasks)
 
 @app.route('/additem', methods=['GET', 'POST'])
 def additem():
