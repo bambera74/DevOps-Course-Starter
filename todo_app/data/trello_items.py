@@ -5,7 +5,7 @@ api_token = os.getenv('TRELLO_TOKEN')
 
 def get_items():
     """
-    Fetches all saved items from the session.
+    Fetches all saved items from the Trello API.
 
     Returns:
         list: The list of saved items.
@@ -21,12 +21,7 @@ def get_items():
 
     todolist = requests.request("GET", url, params=query)
     return todolist.json()
-    #tasks = [d['name'] for d in cards]
-    #return render_template ('index.html', list1=tasks)
 
-    #return session.get('items', _DEFAULT_ITEMS.copy())
-
-#print ('items', _DEFAULT_ITEMS.copy())
 
 def get_item(id):
     """
