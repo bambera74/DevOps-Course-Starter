@@ -1,7 +1,8 @@
-import os, requests
+import os, requests, json
 
 api_key = os.getenv('TRELLO_APIKEY')
 api_token = os.getenv('TRELLO_TOKEN')
+board_id = os.getenv('TRELLO_BOARDID')
 
 def get_items():
     """
@@ -47,18 +48,35 @@ def add_item(title):
     Returns:
         item: The saved item.
     """
-    items = get_items()
+
+    url = "https://api.trello.com/1/cards"
+
+    headers = {
+        "Accept": "application/json"
+                }
+
+    query = {
+        'idList': board_id,
+        'key': api_key,
+        'token': api_token,
+        'name' : title
+    }
+
+    response = requests.request("POST", url, headers=headers, params=query)
+
+    #print(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))
+    #items = get_items()
 
     # Determine the ID for the item based on that of the previously added item
-    id = items[-1]['id'] + 1 if items else 0
+    #id = items[-1]['id'] + 1 if items else 0
 
-    item = { 'id': id, 'title': title, 'status': 'Not Started' }
+    #item = { 'id': id, 'title': title, 'status': 'Not Started' }
 
     # Add the item to the list
-    items.append(item)
-    session['items'] = items
+    #items.append(item)
+    #session['items'] = items
 
-    return item
+    #return item
 
 
 def save_item(item):

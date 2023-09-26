@@ -19,7 +19,7 @@ def index():
     tasks = [d['name'] for d in todolist]
     return render_template ('index.html', list1=tasks)
 
-@app.route('/additem', methods=['GET', 'POST'])
+@app.route('/additem', methods=['POST'])
 def additem():
     if request.method =='POST':
         title = request.form.get('title1')
