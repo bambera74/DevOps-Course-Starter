@@ -3,6 +3,7 @@ import os, requests, json
 api_key = os.getenv('TRELLO_APIKEY')
 api_token = os.getenv('TRELLO_TOKEN')
 board_id = os.getenv('TRELLO_BOARDID')
+list_id = os.getenv('TRELLO_LISTID')
 
 def get_items():
     """
@@ -12,17 +13,24 @@ def get_items():
         list: The list of saved items.
     """
     
-    url = 'https://api.trello.com/1/boards/64ff08619ed13406181ec926/cards'
+    url = f'https://api.trello.com/1/boards/{board_id}/lists'
 
     query ={
-        'fields' : 'name',
+        'cards' : 'open',
+        'card_fields' : ('id','name'),
         'key' : api_key,
-        'token' : api_token
+        'token' : api_token,
     }
 
     todolist = requests.request("GET", url, params=query)
-    return todolist.json()
 
+
+    #obj = json.loads(todolist)
+    #todolist.json() = todolist
+    #return json.dumps(json.loads(todolist), sort_keys=True, indent=4, separators=(",",":"))
+    #json_formatted_str = json.dumps (obj, indent=4)
+    #return json.dumps(obj, indent=4)
+    return todolist
 
 def get_item(id):
     """
@@ -38,7 +46,7 @@ def get_item(id):
     return next((item for item in items if item['id'] == int(id)), None)
 
 
-def add_item(title):
+def add_item(list_id, card_name):
     """
     Adds a new item with the specified title to the session.
 
@@ -56,13 +64,14 @@ def add_item(title):
                 }
 
     query = {
-        'idList': board_id,
+        'idList': list_id,
         'key': api_key,
         'token': api_token,
-        'name' : title
+        'name' : card_name
     }
 
     response = requests.request("POST", url, headers=headers, params=query)
+    return response
 
     #print(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))
     #items = get_items()
