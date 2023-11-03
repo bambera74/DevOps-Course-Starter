@@ -13,16 +13,20 @@ def index():
     todolist_json = todolist.json()
     #json_formatted_str = json.dumps (todolist_json, ",")
 
-    #cards = []
+    list_cards = []
     items = []
     for card in todolist_json:
         #card['status'] - todolist_json['name']
-        item = card['id'], card['name'], card['status']
-        items.append(item)
-        #cards.append(card)
+        #item = card['id'], card['name'], card['status']
+        #items.append(item)
+        list_cards.append(card)
     
+    #for cards in list_cards:
+        #item = cards['.card.id'], cards['.card.name'], cards['.card.status']
+        #items.append(item)
     #tasks = [d['name'] for d in todolist]
-    return render_template ('index.html', list1=items)
+    #return render_template ('index.html', list1=items)
+    return render_template ('index.html', list1=list_cards)
 
 @app.route('/additem', methods=['POST'])
 def additem():
