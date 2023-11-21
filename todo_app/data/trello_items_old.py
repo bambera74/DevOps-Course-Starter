@@ -17,7 +17,7 @@ def get_items():
 
     query ={
         'cards' : 'open',
-        'card_fields' : 'name',
+        'card_fields' : ('id','name'),
         'key' : api_key,
         'token' : api_token,
     }

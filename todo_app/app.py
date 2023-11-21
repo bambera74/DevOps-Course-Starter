@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from todo_app.flask_config import Config
 from todo_app.data.trello_items import get_items, add_item
+from todo_app.views import ViewModel
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -10,23 +11,29 @@ app.config.from_object(Config())
 @app.route('/')
 def index():
     todolist = get_items()
-    todolist_json = todolist.json()
+    #todolist_json = todolist.json()
     #json_formatted_str = json.dumps (todolist_json, ",")
 
-    list_cards = []
-    items = []
-    for card in todolist_json:
+    cards = []
+    ##trello_list = []
+    #items = []
+    ##for trello_list in todolist:
+        ##for card in trello_list['cards']:
+    for card in todolist:
         #card['status'] - todolist_json['name']
         #item = card['id'], card['name'], card['status']
+        #item = card['name'], card['cards.name']
         #items.append(item)
-        list_cards.append(card)
+        cards.append(card)
+    #todolist_view_model = ViewModel(todolist)
     
     #for cards in list_cards:
         #item = cards['.card.id'], cards['.card.name'], cards['.card.status']
         #items.append(item)
     #tasks = [d['name'] for d in todolist]
     #return render_template ('index.html', list1=items)
-    return render_template ('index.html', list1=list_cards)
+    return render_template ('index.html', list1=cards)
+    #return render_template ('index.html', list1=todolist_view_model)
 
 @app.route('/additem', methods=['POST'])
 def additem():
