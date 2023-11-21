@@ -11,29 +11,16 @@ app.config.from_object(Config())
 @app.route('/')
 def index():
     todolist = get_items()
-    #todolist_json = todolist.json()
-    #json_formatted_str = json.dumps (todolist_json, ",")
+    todolist_json = todolist.json()
 
     cards = []
-    ##trello_list = []
-    #items = []
-    ##for trello_list in todolist:
-        ##for card in trello_list['cards']:
-    for card in todolist:
-        #card['status'] - todolist_json['name']
-        #item = card['id'], card['name'], card['status']
-        #item = card['name'], card['cards.name']
-        #items.append(item)
-        cards.append(card)
-    #todolist_view_model = ViewModel(todolist)
     
-    #for cards in list_cards:
-        #item = cards['.card.id'], cards['.card.name'], cards['.card.status']
-        #items.append(item)
-    #tasks = [d['name'] for d in todolist]
-    #return render_template ('index.html', list1=items)
+    for trello_list in todolist_json:
+        for card in trello_list['cards']:
+            cards.append(card)
+ 
     return render_template ('index.html', list1=cards)
-    #return render_template ('index.html', list1=todolist_view_model)
+
 
 @app.route('/additem', methods=['POST'])
 def additem():
