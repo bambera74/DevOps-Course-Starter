@@ -4,6 +4,7 @@ api_key = os.getenv('TRELLO_APIKEY')
 api_token = os.getenv('TRELLO_TOKEN')
 board_id = os.getenv('TRELLO_BOARDID')
 list_id = os.getenv('TRELLO_LISTID')
+TLIST_BACKLOG = os.getenv('TLIST_BACKLOG')
 
 def get_items():
     """
@@ -64,7 +65,7 @@ def add_item(list_id, card_name):
                 }
 
     query = {
-        'idList': list_id,
+        'idList': TLIST_BACKLOG,
         'key': api_key,
         'token': api_token,
         'name' : card_name
