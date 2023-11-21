@@ -24,27 +24,17 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2>Complete Item</h2>
-        <form action="/complete_item" method="post" class="input-form">
-          <div class="input-form">
-            <label for="title">Enter your item ID to complete: </label>
-            <input type="text" name="title1" id="name" required />
-          </div>
-          <div class="input form">
-            <input type="submit" value="Complete Item" />
-          </div>
-        </form>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
       <h2>To-do List</h2>
       <ul class="list-group mb-4">
           <ul>
             <li>
               {% for i in list1 %}
                 <h2>{{ i }}</h2>
+                  <form action="/complete_item" method="post" class="input-form">
+                    <div class="input form">
+                      <input type="submit" value="Complete Item" />
+                    </div>
+                  </form>
               {% endfor %}
             </li>
           </ul>
