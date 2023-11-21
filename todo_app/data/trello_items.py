@@ -3,7 +3,7 @@ import os, requests, json
 api_key = os.getenv('TRELLO_APIKEY')
 api_token = os.getenv('TRELLO_TOKEN')
 board_id = os.getenv('TRELLO_BOARDID')
-list_id = os.getenv('TRELLO_LISTID')
+#list_id = os.getenv('TRELLO_LISTID')
 TLIST_BACKLOG = os.getenv('TLIST_BACKLOG')
 
 def get_items():
