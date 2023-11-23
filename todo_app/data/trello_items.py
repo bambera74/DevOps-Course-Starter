@@ -5,6 +5,7 @@ api_token = os.getenv('TRELLO_TOKEN')
 board_id = os.getenv('TRELLO_BOARDID')
 #list_id = os.getenv('TRELLO_LISTID')
 TLIST_BACKLOG = os.getenv('TLIST_BACKLOG')
+TLIST_DONE=os.getenv('TLIST_DONE')
 
 def get_items():
     """
@@ -102,3 +103,20 @@ def save_item(item):
     session['items'] = updated_items
 
     return item
+
+def complete_item(id):
+
+    url = "https://api.trello.com/1/cards/" + id 
+
+    headers = {
+    "Accept": "application/json"
+    }
+
+    query = {
+    'key': api_key,
+    'token': api_token,
+    'idList': TLIST_DONE
+    }
+
+    response = requests.request("PUT", url, headers=headers, params=query)
+    return response

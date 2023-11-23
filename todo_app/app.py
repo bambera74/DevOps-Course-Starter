@@ -30,4 +30,7 @@ def additem():
         add_item(list_id, card_name)
         return redirect (('/'))
     
-#@app.route('/complete_item', methods=['PUT'])
+@app.route('/items/<id>/complete', methods=['PUT'])
+def complete_task(id):
+    complete_item(id)
+    return redirect (('/'))

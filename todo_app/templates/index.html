@@ -30,11 +30,11 @@
             <li>
               {% for i in list1 %}
                 <h2>{{ i }}</h2>
-                  <form action="/complete_item" method="post" class="input-form">
-                    <div class="input form">
-                      <input type="submit" value="Complete Item" />
-                    </div>
-                  </form>
+                  <div class="input-form">
+                    {% if i.idList != '64ff08619ed13406181ec92d' %}
+                      <a href="{{ url_for('complete_task', id=i.id) }}" class="btn btn-sm btn-primary">Mark as Complete</a>
+                    {% endif %}
+                  </div>
               {% endfor %}
             </li>
           </ul>
