@@ -6,6 +6,15 @@ board_id = os.getenv('TRELLO_BOARDID')
 #list_id = os.getenv('TRELLO_LISTID')
 TLIST_BACKLOG = os.getenv('TLIST_BACKLOG')
 TLIST_DONE=os.getenv('TLIST_DONE')
+TLIST_TODO=os.getenv('TLIST_TODO')
+
+class ViewModel:
+    def __init__(self, items):
+        self._items = items
+    
+    @property
+    def items(self):
+        return self._items
 
 def get_items():
     """
@@ -116,6 +125,23 @@ def complete_item(id):
     'key': api_key,
     'token': api_token,
     'idList': TLIST_DONE
+    }
+
+    response = requests.request("PUT", url, headers=headers, params=query)
+    return response
+
+def move_to_todo(id):
+
+    url = "https://api.trello.com/1/cards/" + id 
+
+    headers = {
+    "Accept": "application/json"
+    }
+
+    query = {
+    'key': api_key,
+    'token': api_token,
+    'idList': TLIST_TODO
     }
 
     response = requests.request("PUT", url, headers=headers, params=query)

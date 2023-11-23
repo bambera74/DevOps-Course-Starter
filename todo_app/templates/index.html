@@ -33,6 +33,8 @@
                   <div class="input-form">
                     {% if i.idList != '64ff08619ed13406181ec92d' %}
                       <a href="{{ url_for('complete_task', id=i.id) }}" class="btn btn-sm btn-primary">Mark as Complete</a>
+                      {% else %}
+                        <a href="{{ url_for('back_todo', id=i.id) }}" class="btn btn-sm btn-primary">Move back todo</a>
                     {% endif %}
                   </div>
               {% endfor %}
