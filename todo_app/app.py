@@ -16,7 +16,7 @@ def index():
     
     for trello_list in todolist_json:
         for card in trello_list['cards']:
-            cards.append({'id': card['id'], 'status': card['idList'], 'title': card['name']})
+            cards.append({'id': card['id'], 'status': card['idList'], 'name': card['name']})
     return render_template ('index.html', list1=cards)
 
 @app.route('/additem', methods=['POST'])
