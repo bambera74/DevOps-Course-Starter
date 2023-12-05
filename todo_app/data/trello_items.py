@@ -8,13 +8,15 @@ TLIST_BACKLOG = os.getenv('TLIST_BACKLOG')
 TLIST_DONE=os.getenv('TLIST_DONE')
 TLIST_TODO=os.getenv('TLIST_TODO')
 
-class ViewModel:
-    def __init__(self, items):
-        self._items = items
+class Item:
+    def __init__(self, id, name, status):
+        self.id = id
+        self.name = name
+        self.status = status
     
-    @property
-    def items(self):
-        return self._items
+    @classmethod
+    def from_trello_card(cls, card, list):
+        return cls(card['id'], card['name'], list['name'])
 
 def get_items():
     """
@@ -34,14 +36,15 @@ def get_items():
     }
 
     todolist = requests.request("GET", url, params=query)
+    todolist_json = todolist.json()
 
-
-    #obj = json.loads(todolist)
-    #todolist.json() = todolist
-    #return json.dumps(json.loads(todolist), sort_keys=True, indent=4, separators=(",",":"))
-    #json_formatted_str = json.dumps (obj, indent=4)
-    #return json.dumps(obj, indent=4)
-    return todolist
+    cards = []
+  
+    for trello_list in todolist_json:
+        for card in trello_list['cards']:
+            cards.append({'id': card['id'], 'status': card['idList'], 'name': card['name']})
+    
+    return cards
 
 def get_item(id):
     """

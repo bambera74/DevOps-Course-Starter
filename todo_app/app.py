@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from todo_app.flask_config import Config
-from todo_app.data.trello_items import get_items, add_item, complete_item, move_to_todo
+from todo_app.data.trello_items import get_items, add_item, complete_item, move_to_todo, Item
 
 app = Flask(__name__)
 app.config.from_object(Config())
@@ -9,14 +9,11 @@ app.config.from_object(Config())
 
 @app.route('/')
 def index():
-    todolist = get_items()
-    todolist_json = todolist.json()
+    cards = get_items()
 
-    cards = []
-    
-    for trello_list in todolist_json:
-        for card in trello_list['cards']:
-            cards.append({'id': card['id'], 'status': card['idList'], 'name': card['name']})
+#    class_items = Item(todolist)
+#    return render_template ('index.html', list1=class_items)
+
     return render_template ('index.html', list1=cards)
 
 @app.route('/additem', methods=['POST'])
