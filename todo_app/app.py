@@ -11,9 +11,6 @@ app.config.from_object(Config())
 def index():
     cards = get_items()
 
-#    class_items = Item(todolist)
-#    return render_template ('index.html', list1=class_items)
-
     return render_template ('index.html', list1=cards)
 
 @app.route('/additem', methods=['POST'])
