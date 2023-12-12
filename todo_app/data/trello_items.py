@@ -3,7 +3,6 @@ import os, requests, json
 api_key = os.getenv('TRELLO_APIKEY')
 api_token = os.getenv('TRELLO_TOKEN')
 board_id = os.getenv('TRELLO_BOARDID')
-#list_id = os.getenv('TRELLO_LISTID')
 TLIST_BACKLOG = os.getenv('TLIST_BACKLOG')
 TLIST_DONE=os.getenv('TLIST_DONE')
 TLIST_TODO=os.getenv('TLIST_TODO')
@@ -16,7 +15,7 @@ class Item:
     
     @classmethod
     def from_trello_card(cls, card):
-        return cls(card['id'], card['name'], card['idlist'])
+        return cls(card['id'], card['name'], card['idList'])
 
 def get_items():
     """
@@ -43,7 +42,7 @@ def get_items():
     for trello_list in todolist_json:
         for card in trello_list['cards']:
             cards.append({'id': card['id'], 'status': card['idList'], 'name': card['name']})
-    
+            #cards.append(Item.from_trello_card(card))
     return cards
 
 def get_item(id):
