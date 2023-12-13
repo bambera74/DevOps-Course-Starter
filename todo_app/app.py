@@ -1,27 +1,34 @@
-from flask import Flask, render_template
-
+import os
+from flask import Flask, render_template, request, redirect
 from todo_app.flask_config import Config
-
-from todo_app.data.session_items import get_items
-
-from todo_app.data.session_items import add_item
-
-from flask import request, redirect, session
+from todo_app.data.trello_items import get_items, add_item, complete_item, move_to_todo, Item
 
 app = Flask(__name__)
 app.config.from_object(Config())
 
 
+
 @app.route('/')
 def index():
-    todolist = get_items()
-    titles = [d['title'] for d in todolist]
-    return render_template ('index.html', list1=titles)
+    cards = get_items()
 
-@app.route('/additem', methods=['GET', 'POST'])
+    return render_template ('index.html', list1=cards)
+
+@app.route('/additem', methods=['POST'])
 def additem():
     if request.method =='POST':
-        title = request.form.get('title1')
-        add_item(title)
+        card_name = request.form.get('item_to_add')
+        list_id = os.getenv('TLIST_BACKLOG')
+
+        add_item(list_id, card_name)
         return redirect (('/'))
     
+@app.route('/items/<id>/complete')
+def complete_task(id):
+    complete_item(id)
+    return redirect (('/'))
+
+@app.route('/items/<id>/backtodo')
+def back_todo(id):
+    move_to_todo(id)
+    return redirect (('/'))

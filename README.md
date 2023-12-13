@@ -52,3 +52,9 @@ You should see output similar to the following:
  * Debugger PIN: 226-556-590
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
+
+## Installing the app using Ansible
+
+Copy the .env template file to the control node using the command below
+
+scp .env.j2 ec2-user@18.135.219.172:/home/ec2-user/my-templates/.env.j2
