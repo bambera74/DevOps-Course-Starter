@@ -1,12 +1,5 @@
 import os, requests, json
 
-api_key = os.getenv('TRELLO_APIKEY')
-api_token = os.getenv('TRELLO_TOKEN')
-board_id = os.getenv('TRELLO_BOARDID')
-TLIST_BACKLOG = os.getenv('TLIST_BACKLOG')
-TLIST_DONE=os.getenv('TLIST_DONE')
-TLIST_TODO=os.getenv('TLIST_TODO')
-
 class Item:
     def __init__(self, id, name, status):
         self.id = id
@@ -25,13 +18,13 @@ def get_items():
         list: The list of saved items.
     """
     
-    url = f'https://api.trello.com/1/boards/{board_id}/lists'
+    url = f'https://api.trello.com/1/boards/{os.getenv("TRELLO_BOARDID")}/lists'
 
     query ={
         'cards' : 'open',
         'card_fields' : 'name,idList',
-        'key' : api_key,
-        'token' : api_token,
+        'key' : os.getenv('TRELLO_APIKEY'),
+        'token' : os.getenv('TRELLO_TOKEN'),
     }
 
     todolist = requests.request("GET", url, params=query)
@@ -77,9 +70,9 @@ def add_item(list_id, card_name):
                 }
 
     query = {
-        'idList': TLIST_BACKLOG,
-        'key': api_key,
-        'token': api_token,
+        'idList': os.getenv('TLIST_BACKLOG'),
+        'key': os.getenv('TRELLO_APIKEY'),
+        'token': os.getenv('TRELLO_TOKEN'),
         'name' : card_name
     }
 
@@ -124,9 +117,9 @@ def complete_item(id):
     }
 
     query = {
-    'key': api_key,
-    'token': api_token,
-    'idList': TLIST_DONE
+    'key': os.getenv('TRELLO_APIKEY'),
+    'token': os.getenv('TRELLO_TOKEN'),
+    'idList': os.getenv('TLIST_DONE')
     }
 
     response = requests.request("PUT", url, headers=headers, params=query)
@@ -141,9 +134,9 @@ def move_to_todo(id):
     }
 
     query = {
-    'key': api_key,
-    'token': api_token,
-    'idList': TLIST_TODO
+    'key': os.getenv('TRELLO_APIKEY'),
+    'token': os.getenv('TRELLO_TOKEN'),
+    'idList': os.getenv('TLIST_TODO')
     }
 
     response = requests.request("PUT", url, headers=headers, params=query)
