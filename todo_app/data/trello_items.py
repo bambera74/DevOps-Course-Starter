@@ -34,8 +34,8 @@ def get_items():
   
     for trello_list in todolist_json:
         for card in trello_list['cards']:
-            cards.append({'id': card['id'], 'status': card['idList'], 'name': card['name']})
-            #cards.append(Item.from_trello_card(card))
+            #cards.append({'id': card['id'], 'status': card['idList'], 'name': card['name']})
+            cards.append(Item.from_trello_card(card))
     return cards
 
 def get_item(id):
