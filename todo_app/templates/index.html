@@ -28,7 +28,7 @@
       <ul class="list-group mb-4">
           <ul>
             <li>
-              {% for i in list1 %}
+              {% for i in view_model.items %}
                 <h2>{{ i.name }} - {{ i.status }}</h2>
                   <div class="input-form">
                     {% if i.status != '64ff08619ed13406181ec92d' %}

@@ -2,17 +2,16 @@ import os
 from flask import Flask, render_template, request, redirect
 from todo_app.flask_config import Config
 from todo_app.data.trello_items import get_items, add_item, complete_item, move_to_todo, Item
+from todo_app.view_model import ViewModel
 
 app = Flask(__name__)
 app.config.from_object(Config())
 
-
-
 @app.route('/')
 def index():
     cards = get_items()
-
-    return render_template ('index.html', list1=cards)
+    item_view_model = ViewModel(cards)
+    return render_template ('index.html', view_model=item_view_model)
 
 @app.route('/additem', methods=['POST'])
 def additem():
