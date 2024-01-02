@@ -58,3 +58,11 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 Copy the .env template file to the control node using the command below
 
 scp .env.j2 ec2-user@18.135.219.172:/home/ec2-user/my-templates/.env.j2
+
+## Testing
+
+Add pytest as a dependency of our project by running poetry add pytest. This should download pytest and also update pyproject.toml for you.
+
+test_view_model.py has been provided to test that the ViewModel class is functioning correctly.
+A sample set of data has been provided in test_view_model.py which can be extended to cover other use cases.
+To execute the test simly run pytest from the terminal.
