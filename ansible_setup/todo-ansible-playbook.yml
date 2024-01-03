@@ -1,0 +1,53 @@
+- name: Install todo app on server
+  hosts: Webservers
+  remote_user: ec2-user
+  
+  vars_prompt:
+  - name: TRELLO_SECRET
+    prompt: What is your Trello API Token?
+    private: true
+
+  tasks:
+  - name: Install Git
+    ansible.builtin.yum:
+      name: git
+      state: present
+    become: yes
+
+  - name: Install Python
+    ansible.builtin.yum:
+      name: python3
+      state: present
+    become: yes
+
+  - name: Install Poetry
+    ansible.builtin.shell:
+      cmd: curl -sSL https://install.python-poetry.org | python3
+      creates: /home/ec2-user/.local/share/pypoetry/venv/bin/poetry
+
+  - name: Create Folder for todo app
+    ansible.builtin.file:
+      name: /opt/todoapp
+      state: directory
+      owner: ec2-user
+    become: yes
+
+  - name: Git checkout
+    ansible.builtin.git:
+      repo: 'https://github.com/bambera74/DevOps-Course-Starter'
+      dest: /opt/todoapp
+      version: main
+
+  - name: Install Poetry Dependencies
+    ansible.builtin.shell:
+      chdir: /opt/todoapp
+      cmd: /home/ec2-user/.local/bin/poetry install   
+      creates: /opt/todoapp/.venv/bin/flask
+
+  - name: Template env file
+    ansible.builtin.template:
+      src: /home/ec2-user/my-templates/.env.j2
+      dest: /opt/todoapp/.env
+      owner: ec2-user
+      creates: /opt/todoapp/.env
+    become: yes
