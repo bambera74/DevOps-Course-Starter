@@ -1,11 +1,11 @@
 - name: Install todo app on server
   hosts: Webservers
   remote_user: ec2-user
-  
+
   vars_prompt:
   - name: TRELLO_TOKEN
     prompt: What is your Trello API Token?
-    private: true
+    private: false
 
   tasks:
   - name: Install Git
@@ -49,5 +49,19 @@
       src: /home/ec2-user/my-templates/.env.j2
       dest: /opt/todoapp/.env
       owner: ec2-user
-      creates: /opt/todoapp/.env
+    become: yes
+
+  - name: Copy todoapp.service file with owner and become = yes
+    ansible.builtin.copy:
+      remote_src: true
+      src: /opt/todoapp/todo_app/todoapp.service
+      dest: /etc/systemd/system/todoapp.service
+      owner: ec2-user
+    become: yes
+
+  - name: Restart service todoapp, in all cases, also issue daemon-reload to pick up config changes
+    ansible.builtin.systemd_service:
+      state: restarted
+      daemon_reload: true
+      name: todoapp
     become: yes
