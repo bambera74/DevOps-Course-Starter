@@ -62,6 +62,8 @@ Copy the .env.j2 template file from the ansible_setuo folder on your local machi
 Navigate to the folder containing the .env.j2 file in a terminal then run;
 >scp .env.j2 ec2-user@{host_ip_address}:/home/ec2-user/my-templates/.env.j2
 
+IMPORTANT NOTE: Ansible playbook currently references Module4 for the git checkout
+
 ## Testing to todo application
 
 Add pytest as a dependency of our project by running poetry add pytest. This should download pytest and also update pyproject.toml for you.
