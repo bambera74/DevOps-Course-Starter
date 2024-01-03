@@ -3,7 +3,7 @@
   remote_user: ec2-user
   
   vars_prompt:
-  - name: TRELLO_SECRET
+  - name: TRELLO_TOKEN
     prompt: What is your Trello API Token?
     private: true
 
@@ -36,7 +36,7 @@
     ansible.builtin.git:
       repo: 'https://github.com/bambera74/DevOps-Course-Starter'
       dest: /opt/todoapp
-      version: main
+      version: Module4
 
   - name: Install Poetry Dependencies
     ansible.builtin.shell:
