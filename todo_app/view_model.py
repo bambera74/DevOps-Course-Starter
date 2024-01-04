@@ -9,7 +9,7 @@ class ViewModel:
     
     @property
     def done_items(self):
-        done_items = [item for item in self._items if item['status']=="done"]         
+        done_items = [item for item in self._items if item.status == "done"]         
         return done_items
     
     @property
