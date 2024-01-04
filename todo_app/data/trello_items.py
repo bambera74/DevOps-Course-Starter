@@ -8,7 +8,7 @@ class Item:
 
     @classmethod
     def from_trello_card(cls, card):
-        return cls(card['id'], card['name'], card['idList'])
+        return cls(card['id'], card['name'], card['listName'])
 
 def get_items():
     """
@@ -22,7 +22,7 @@ def get_items():
 
     query ={
         'cards' : 'open',
-        'card_fields' : 'name,idList',
+        'card_fields' : 'name,listName',
         'key' : os.getenv('TRELLO_APIKEY'),
         'token' : os.getenv('TRELLO_TOKEN'),
     }
@@ -34,7 +34,6 @@ def get_items():
   
     for trello_list in todolist_json:
         for card in trello_list['cards']:
-            #cards.append({'id': card['id'], 'status': card['idList'], 'name': card['name']})
             cards.append(Item.from_trello_card(card))
     return cards
 
