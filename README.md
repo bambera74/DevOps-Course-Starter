@@ -55,6 +55,27 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 ## Installing the app using Ansible
 
-Copy the .env template file to the control node using the command below
+Copy the ansible playbook and inventory files from the ansible_setup folder to a suitable location on your control host. Edit the inventory file on your control host to reflect your own inventory.
 
-scp .env.j2 ec2-user@18.135.219.172:/home/ec2-user/my-templates/.env.j2
+Copy the .env.j2 template file from the ansible_setup folder on your local machine to the control node using the command below:
+
+Navigate to the folder containing the .env.j2 file in a terminal then run;
+>scp .env.j2 ec2-user@{host_ip_address}:/home/ec2-user/my-templates/.env.j2
+
+IMPORTANT NOTE: Ansible playbook currently references Module4 for the git checkout
+
+## Testing to todo application
+
+Add pytest as a dependency of our project by running poetry add pytest. This should download pytest and also update pyproject.toml for you.
+
+test_view_model.py 
+==================
+has been provided to test that the ViewModel class is functioning correctly.
+A sample set of data has been provided in test_view_model.py which can be extended to cover other use cases.
+To execute the test simply run pytest from the terminal.
+
+test_integration.py
+===================
+has been provided to test the integration between app.py and trello_items.py. It uses monkeypatch to patch the call the the Trello API and test that the rest of the todo app is processing card correctly.
+To eexecute the test simply run pytest from the terminal. Any changes made to the request function in trello_items.py would need to be reflected in this test file too.
+
