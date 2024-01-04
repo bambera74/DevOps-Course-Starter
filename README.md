@@ -57,7 +57,7 @@ Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser
 
 Copy the ansible playbook and inventory files from the ansible_setup folder to a suitable location on your control host. Edit the inventory file on your control host to reflect your own inventory.
 
-Copy the .env.j2 template file from the ansible_setuo folder on your local machine to the control node using the command below:
+Copy the .env.j2 template file from the ansible_setup folder on your local machine to the control node using the command below:
 
 Navigate to the folder containing the .env.j2 file in a terminal then run;
 >scp .env.j2 ec2-user@{host_ip_address}:/home/ec2-user/my-templates/.env.j2
