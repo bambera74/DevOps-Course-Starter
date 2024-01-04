@@ -5,12 +5,14 @@ import pytest
 @pytest.fixture
 def test_cards():
 
-    cards = [{'id': '1', 'status': 'todo', 'name': 'testcard1'},
-             {'id': '2', 'status': 'todo', 'name': 'testcard2'},
-             {'id': '3', 'status': 'doing', 'name': 'testcard3'},
-             {'id': '4', 'status': 'doing', 'name': 'testcard4'},
-             {'id': '5', 'status': 'doing', 'name': 'testcard5'},
-             {'id': '6', 'status': 'done', 'name': 'testcard6'}]
+    cards = [
+            Item('1', 'todo', 'testcard1'),
+            Item('2', 'todo', 'testcard2'),
+            Item('3', 'doing', 'testcard3'),
+            Item('4', 'doing', 'testcard4'),
+            Item('5', 'doing', 'testcard5'),
+            Item('6', 'done', 'testcard6'),
+    ]
     return cards
 
 def test_view_model_handles_items_correctly(test_cards):
