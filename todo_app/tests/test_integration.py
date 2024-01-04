@@ -26,11 +26,8 @@ class StubResponse():
 
 # Stub replacement for requests.request(url)
 def stub(get, url, params={}):
-#def stub(url):
-    #test_board_id = os.environ.get('TRELLO_BOARDID')
     fake_response_data = None
     if url == f'https://api.trello.com/1/boards/{os.getenv("TRELLO_BOARDID")}/lists':
-    #if url == f'https://api.trello.com/1/boards/64ff08619ed13406181ec926/lists':
         fake_response_data = [{
             'id': '123abc',
             'name': 'To Do',
@@ -44,7 +41,7 @@ def stub(get, url, params={}):
 def test_index_page(monkeypatch, client):
     # Replace requests.get(url) with our own function
     monkeypatch.setattr(requests, 'request', stub)
-    #monkeypatch.setattr(requests, stub)
+    
     # Make a request to our app's index page
     response = client.get('/')
 
