@@ -5,7 +5,7 @@
   vars_prompt:
   - name: TRELLO_TOKEN
     prompt: What is your Trello API Token?
-    private: false
+    private: true
 
   tasks:
   - name: Install Git
