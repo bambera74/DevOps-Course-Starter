@@ -87,6 +87,8 @@ Run the following command from a machine with docker installed. The command must
 
 docker run --publish 5001:5000 --env-file .env todoapp
 
+Note: add the -d flag to run in detached mode
+
 You can then browse the site using 'http://{hostname_url or localhost}:5001'
 
 
