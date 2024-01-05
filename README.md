@@ -79,3 +79,14 @@ test_integration.py
 has been provided to test the integration between app.py and trello_items.py. It uses monkeypatch to patch the call the the Trello API and test that the rest of the todo app is processing card correctly.
 To eexecute the test simply run pytest from the terminal. Any changes made to the request function in trello_items.py would need to be reflected in this test file too.
 
+## Running the app in a docker container
+
+Ensure that your .env file is in the same root folder as the Dockerfile and contains the relevant information for your instance of Trello, API key, token and board / list IDs.
+
+Run the following command from a machine with docker installed. The command must be run from the same location as the Dockerfile:
+
+docker run --publish 5001:5000 --env-file .env todoapp
+
+You can then browse the site using 'http://{hostname_url or localhost}:5001'
+
+
