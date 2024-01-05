@@ -10,4 +10,4 @@ COPY ./todo_app/data/*.py todo_app/data/
 COPY ./*.toml /opt/todoapp/
 RUN poetry install -n
 EXPOSE 5000
-ENTRYPOINT flask run
+ENTRYPOINT flask run --host=0.0.0.0
