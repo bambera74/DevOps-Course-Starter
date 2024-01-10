@@ -119,7 +119,7 @@ $ docker run --env-file ./.env -p 5001:500 --mount "type=bind,source=$(pwd)/todo
 
 ## To exit the container running
 
-First run the 'docker container list' coomand to identify the unipque name of your running container.
+First run the 'docker container list' command to identify the unique name of your running container.
 
 Then use the docker stop command to stop your container. i.e. 'docker stop admiring_newton'
 
