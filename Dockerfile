@@ -13,7 +13,7 @@ FROM python:3.9.18-slim-bullseye as base
 FROM python:3.9.18-slim-bullseye as development
 WORKDIR /opt/todoapp
 ENV FLASK_APP todo_app/app.py
-RUN curl -sSL https://install.python-poetry.org | python3
+#RUN curl -sSL https://install.python-poetry.org | python3
 RUN pip install flask
 RUN pip install poetry
 COPY ./todo_app/*.py todo_app/
@@ -26,7 +26,7 @@ ENTRYPOINT flask run --host=0.0.0.0
 
 FROM python:3.9.18-slim-bullseye as production
 WORKDIR /opt/todoapp
-RUN curl -sSL https://install.python-poetry.org | python3
+#RUN curl -sSL https://install.python-poetry.org | python3
 RUN pip install poetry
 COPY ./todo_app/*.py todo_app/
 COPY ./todo_app/templates/*.html todo_app/templates/
