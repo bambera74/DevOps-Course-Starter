@@ -115,9 +115,7 @@ For Prod you can then browse the site using 'http://{hostname_url or localhost}:
 
 You may want to take advantage of the way that flask allows for dynamic reloads in your development container. To do this, you can mount the files on your local machine into the container using the bind mount command:
 
-$ docker run --env-file ./.env -p 5100:80 --mount "type=bind,source=$(pwd)/todo_app,target=/app/todo_app" todo-app:dev
-
-i.e. docker run --publish 5001:5000 --env-file .env --mount "type=bind,source=/Users/ashleybamber/DevOps/devops-course-starter/todo_app,target=/opt/todo_app" todoapp:dev
+$ docker run --env-file ./.env -p 5001:500 --mount "type=bind,source=$(pwd)/todo_app,target=/opt/todo_app" todoapp:dev
 
 ## To exit the container running
 
