@@ -101,9 +101,9 @@ Run the following command from a machine with docker installed.
 
 The command must be run from the same location as the Dockerfile:
 
-DEV : 'docker run --publish 5001:5000 --env-file .env todoapp'
+DEV : 'docker run --publish 5001:5000 --env-file .env todoapp:dev'
 
-PROD : 'docker run --publish 5002:8000 --env-file .env todoapp'
+PROD : 'docker run --publish 5002:8000 --env-file .env todoapp:prod'
 
 Note: add the -d flag to run in detached mode
 
