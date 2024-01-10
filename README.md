@@ -101,9 +101,9 @@ Run the following command from a machine with docker installed.
 
 The command must be run from the same location as the Dockerfile:
 
-DEV : 'docker run --publish 5001:5000 --env-file .env todoapp'
+DEV : 'docker run --publish 5001:5000 --env-file .env todoapp:dev'
 
-PROD : 'docker run --publish 5002:8000 --env-file .env todoapp'
+PROD : 'docker run --publish 5002:8000 --env-file .env todoapp:prod'
 
 Note: add the -d flag to run in detached mode
 
@@ -115,13 +115,11 @@ For Prod you can then browse the site using 'http://{hostname_url or localhost}:
 
 You may want to take advantage of the way that flask allows for dynamic reloads in your development container. To do this, you can mount the files on your local machine into the container using the bind mount command:
 
-$ docker run --env-file ./.env -p 5100:80 --mount "type=bind,source=$(pwd)/todo_app,target=/app/todo_app" todo-app:dev
-
-i.e. docker run --publish 5001:5000 --env-file .env --mount "type=bind,source=/Users/ashleybamber/DevOps/devops-course-starter/todo_app,target=/opt/todo_app" todoapp:dev
+$ docker run --env-file ./.env -p 5001:500 --mount "type=bind,source=$(pwd)/todo_app,target=/opt/todo_app" todoapp:dev
 
 ## To exit the container running
 
-First run the 'docker container list' coomand to identify the unipque name of your running container.
+First run the 'docker container list' command to identify the unique name of your running container.
 
 Then use the docker stop command to stop your container. i.e. 'docker stop admiring_newton'
 
