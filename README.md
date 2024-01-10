@@ -83,12 +83,43 @@ To eexecute the test simply run pytest from the terminal. Any changes made to th
 
 Ensure that your .env file is in the same root folder as the Dockerfile and contains the relevant information for your instance of Trello, API key, token and board / list IDs.
 
-Run the following command from a machine with docker installed. The command must be run from the same location as the Dockerfile:
+## To build to docker container
 
-docker run --publish 5001:5000 --env-file .env todoapp
+Run the following commands from a machine with docker installed.
+
+To build a prod container run the command below from the same location as the dockerfile :
+
+docker build --target production --tag todoapp:prod .
+
+To build a dev container run the command below from the same location as the dockerfile :
+
+docker build --target development --tag todoapp:dev .
+
+## To run the container
+
+Run the following command from a machine with docker installed. 
+
+The command must be run from the same location as the Dockerfile:
+
+DEV : 'docker run --publish 5001:5000 --env-file .env todoapp:dev'
+
+PROD : 'docker run --publish 5002:8000 --env-file .env todoapp:prod'
 
 Note: add the -d flag to run in detached mode
 
-You can then browse the site using 'http://{hostname_url or localhost}:5001'
+For Dev you can then browse the site using 'http://{hostname_url or localhost}:5001'
 
-Testing git branch
+For Prod you can then browse the site using 'http://{hostname_url or localhost}:5002'
+
+## To run a development container with a bind mount
+
+You may want to take advantage of the way that flask allows for dynamic reloads in your development container. To do this, you can mount the files on your local machine into the container using the bind mount command:
+
+$ docker run --env-file ./.env -p 5001:500 --mount "type=bind,source=$(pwd)/todo_app,target=/opt/todo_app" todoapp:dev
+
+## To exit the container running
+
+First run the 'docker container list' command to identify the unique name of your running container.
+
+Then use the docker stop command to stop your container. i.e. 'docker stop admiring_newton'
+
